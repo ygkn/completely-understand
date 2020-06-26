@@ -48,7 +48,7 @@ const Component: React.FC<ComponentProps> = ({ showResult, pageInfo }) => (
         <p className="my-5 text-center">
           <TwitterShareButton
             url={`https://completely-understand.ygkn.dev/?pageid=${pageInfo.pageid}`}
-            title={`「${pageInfo.title}」を完全に理解した！🎉`}
+            title={`${pageInfo.title}完全に理解した`}
             className="bg-blue-500 text-white py-2 px-5 rounded-full focus:outline-none focus:shadow-outline"
             resetButtonStyle={false}
           >
