@@ -1,8 +1,9 @@
-import { NextPage } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { TwitterShareButton } from 'react-share';
 
 import { useRandomWikipedia } from '../hooks';
+import { PageInfo } from '../hooks/useRandomWikipedia';
 
 type ComponentProps = Omit<
   ReturnType<typeof useRandomWikipedia>,
@@ -10,6 +11,8 @@ type ComponentProps = Omit<
 > & {
   showResult: () => unknown;
 };
+
+type PageProps = { pageInfo?: PageInfo | undefined };
 
 const Component: React.FC<ComponentProps> = ({ showResult, pageInfo }) => (
   <div className="max-w-3xl mx-auto flex flex-col items-center px-5">
@@ -105,10 +108,41 @@ const Component: React.FC<ComponentProps> = ({ showResult, pageInfo }) => (
   </div>
 );
 
-const IndexPage: NextPage = () => {
+const IndexPage: NextPage<PageProps> = ({ pageInfo: initialPageInfo }) => {
   const { drawNext, pageInfo, error } = useRandomWikipedia();
 
-  return <Component pageInfo={pageInfo} error={error} showResult={drawNext} />;
+  return (
+    <Component
+      pageInfo={pageInfo || initialPageInfo}
+      error={error}
+      showResult={drawNext}
+    />
+  );
+};
+
+export const getServerSideProps: GetServerSideProps<PageProps> = async (
+  context
+) => {
+  try {
+    const { pageid } = context.query;
+
+    if (typeof pageid !== 'string') {
+      return { props: {} };
+    }
+
+    const result = await fetch(
+      `https://ja.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=1&explaintext=1&pageids=${pageid}`
+    );
+
+    const data = await result.json();
+
+    const pages: undefined | { [K in string]: PageInfo } = data?.query?.pages;
+    const pageInfo = pages && Object.values(pages)[0];
+
+    return { props: { pageInfo } };
+  } catch (e) {
+    return { props: {} };
+  }
 };
 
 export default IndexPage;
