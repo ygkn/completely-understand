@@ -17,7 +17,7 @@ class MyDocument extends Document {
 
   render(): JSX.Element {
     return (
-      <Html lang="ja">
+      <Html lang="ja" className="min-h-full">
         <Head>
           <meta charSet="UTF-8" />
           <meta
@@ -26,7 +26,7 @@ class MyDocument extends Document {
           />
           <link rel="shortcut icon" href="/favicon.svg" />
         </Head>
-        <body>
+        <body className="h-full">
           <Main />
           <NextScript />
         </body>
