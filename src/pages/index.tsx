@@ -1,8 +1,10 @@
 import { NextPage, GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
+import { useCallback } from 'react';
 import { TwitterShareButton } from 'react-share';
 
-import { useRandomWikipedia } from '../hooks';
+import { useRandomWikipedia, useHappyTalk } from '../hooks';
+import { HappyTalk } from '../hooks/useHappyTalk';
 import { PageInfo } from '../hooks/useRandomWikipedia';
 
 type ComponentProps = Omit<
@@ -10,11 +12,16 @@ type ComponentProps = Omit<
   'drawNext'
 > & {
   showResult: () => unknown;
+  happyTalk: HappyTalk;
 };
 
 type PageProps = { pageInfo?: PageInfo | undefined };
 
-const Component: React.FC<ComponentProps> = ({ showResult, pageInfo }) => (
+const Component: React.FC<ComponentProps> = ({
+  showResult,
+  pageInfo,
+  happyTalk,
+}) => (
   <div className="max-w-3xl mx-auto flex flex-col items-center px-5">
     <NextSeo title="完全に理解した" titleTemplate="%s" />
     <header>
@@ -35,7 +42,7 @@ const Component: React.FC<ComponentProps> = ({ showResult, pageInfo }) => (
           <span role="img" aria-label="クラッカー">
             🎉
           </span>
-          おめでとう！
+          {happyTalk}
           <span role="img" aria-label="クラッカー">
             🎉
           </span>
@@ -109,13 +116,20 @@ const Component: React.FC<ComponentProps> = ({ showResult, pageInfo }) => (
 );
 
 const IndexPage: NextPage<PageProps> = ({ pageInfo: initialPageInfo }) => {
-  const { drawNext, pageInfo, error } = useRandomWikipedia();
+  const { drawNext: drawWord, pageInfo, error } = useRandomWikipedia();
+  const { draw: drawHappyTalk, happyTalk } = useHappyTalk();
+
+  const showResult = useCallback(async () => {
+    await drawWord();
+    drawHappyTalk();
+  }, [drawHappyTalk, drawWord]);
 
   return (
     <Component
       pageInfo={pageInfo || initialPageInfo}
       error={error}
-      showResult={drawNext}
+      showResult={showResult}
+      happyTalk={happyTalk}
     />
   );
 };
