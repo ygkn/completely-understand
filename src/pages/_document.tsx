@@ -26,7 +26,7 @@ class MyDocument extends Document {
           />
           <link rel="shortcut icon" href="/favicon.svg" />
         </Head>
-        <body className="h-full">
+        <body className="h-full font-sans">
           <Main />
           <NextScript />
         </body>
