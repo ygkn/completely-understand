@@ -25,6 +25,7 @@ class MyDocument extends Document {
             content="width=device-width, initial-scale=1.0"
           />
           <link rel="shortcut icon" href="/favicon.svg" />
+          <link rel="manifest" href="/manifest.json" />
         </Head>
         <body className="h-full font-sans">
           <Main />
