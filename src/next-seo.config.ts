@@ -24,4 +24,13 @@ export const SEO: DefaultSeoProps = {
       },
     ],
   },
+  additionalMetaTags: [
+    { name: 'application-name', content: siteName },
+    { name: 'apple-mobile-web-app-capable', content: 'yes' },
+    { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
+    { name: 'apple-mobile-web-app-title', content: '完全理解' },
+    { name: 'format-detection', content: 'telephone=no' },
+    { name: 'mobile-web-app-capable', content: 'yes' },
+    { name: 'theme-color', content: '#000000' },
+  ],
 };
