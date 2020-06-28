@@ -30,7 +30,7 @@ const Component: React.FC<ComponentProps> = ({
       </h1>
     </header>
     <button
-      className="bg-gray-900 text-white py-3 px-10 rounded-full focus:outline-none focus:shadow-outline"
+      className="bg-gray-900 text-white py-3 px-10 rounded-full focus:outline-none focus:shadow-outline shadow-md hover:shadow-lg transition-shadow duration-100"
       onClick={showResult}
       type="button"
     >
