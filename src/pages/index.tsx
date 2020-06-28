@@ -75,7 +75,7 @@ const Component: React.FC<ComponentProps> = ({
             出典:
             <a
               href={`https://ja.wikipedia.org/?curid=${pageInfo.pageid}`}
-              className="text-blue-600 hover:underline"
+              className="text-blue-700 hover:underline"
             >
               フリー百科事典『ウィキペディア（Wikipedia）』
             </a>
@@ -105,7 +105,7 @@ const Component: React.FC<ComponentProps> = ({
       <p>
         Twitter:
         <a
-          className="text-blue-600 hover:underline"
+          className="text-blue-700 hover:underline"
           href="https://twitter.com/ygkn35034"
         >
           @ygkn35034
