@@ -96,8 +96,8 @@ const Component: React.FC<ComponentProps> = ({
       </h1>
       <p>完全に理解するためのWebアプリです。</p>
       <p>
-        「完全に理解する」ボタンを押すと Wikipedia の Web
-        サイトからランダムに選んだ記事を 1 つ表示します。
+        「完全に理解する」ボタンを押すと Wikipedia
+        の記事からランダムに選んだ記事を 1 つ表示します。
       </p>
       <h1 className="sm:text-2xl text-xl font-medium title-font text-center text-gray-900 mb-5">
         つくったひと
