@@ -26,6 +26,10 @@ class MyDocument extends Document {
           />
           <link rel="shortcut icon" href="/favicon.svg" />
           <link rel="manifest" href="/manifest.json" />
+          <link
+            rel="apple-touch-icon"
+            href="images/icons/apple-touch-icon.png"
+          />
         </Head>
         <body className="h-full font-sans">
           <Main />
