@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "next": "9.5.1",
-    "next-pwa": "2.6.1",
+    "next-pwa": "2.6.3",
     "next-seo": "4.6.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
