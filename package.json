@@ -17,7 +17,7 @@
     "next-seo": "4.6.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-share": "4.2.0",
+    "react-share": "4.4.0",
     "tailwindcss": "1.4.6"
   },
   "devDependencies": {
