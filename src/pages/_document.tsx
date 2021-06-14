@@ -7,31 +7,36 @@ import Document, {
   DocumentInitialProps,
 } from 'next/document';
 
+import manifestJSON from '../../public/manifest.json';
+
 class MyDocument extends Document {
   static async getInitialProps(
     ctx: DocumentContext
   ): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+
+    return initialProps;
   }
 
   render(): JSX.Element {
     return (
-      <Html lang="ja" className="min-h-full">
+      <Html lang="ja">
         <Head>
           <meta charSet="UTF-8" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
-          <link rel="shortcut icon" href="/favicon.svg" />
+          <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
           <link rel="manifest" href="/manifest.json" />
-          <link
-            rel="apple-touch-icon"
-            href="images/icons/apple-touch-icon.png"
+          <meta name="theme-color" content="#B61F38" />
+          <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+          <meta name="mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
           />
+          <meta name="apple-mobile-web-app-title" content={manifestJSON.name} />
+          <meta name="application-name" content={manifestJSON.short_name} />
         </Head>
-        <body className="h-full font-sans">
+        <body className="font-sans bg-white text-black dark:bg-black dark:text-white">
           <Main />
           <NextScript />
         </body>
