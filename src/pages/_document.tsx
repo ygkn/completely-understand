@@ -1,3 +1,4 @@
+import { ColorModeScript } from '@chakra-ui/react';
 import Document, {
   Html,
   Head,
@@ -8,6 +9,7 @@ import Document, {
 } from 'next/document';
 
 import manifestJSON from '../../public/manifest.json';
+import { theme } from '../theme';
 
 class MyDocument extends Document {
   static async getInitialProps(
@@ -37,6 +39,7 @@ class MyDocument extends Document {
           <meta name="application-name" content={manifestJSON.short_name} />
         </Head>
         <body className="font-sans bg-white text-black dark:bg-black dark:text-white">
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
           <NextScript />
         </body>

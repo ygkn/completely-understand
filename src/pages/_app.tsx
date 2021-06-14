@@ -1,22 +1,15 @@
-import '../styles/index.css';
+import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
-import { VFC, useEffect } from 'react';
+import { VFC } from 'react';
+
+import { theme } from '../theme';
 
 const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
-  useEffect(() => {
-    const setFillHeight = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-
-    window.addEventListener('resize', setFillHeight, { passive: true });
-
-    setFillHeight();
-
-    return () => window.removeEventListener('resize', setFillHeight);
-  }, []);
-
-  return <Component {...pageProps} />;
+  return (
+    <ChakraProvider theme={theme}>
+      <Component {...pageProps} />
+    </ChakraProvider>
+  );
 };
 
 export default MyApp;
