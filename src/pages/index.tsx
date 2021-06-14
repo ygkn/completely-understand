@@ -13,16 +13,21 @@ import { useCallback } from 'react';
 import { TwitterShareButton } from 'react-share';
 
 import { useHappyTalk } from '../hooks/useHappyTalk';
-import { useRandomWikipedia, PageInfo } from '../hooks/useRandomWikipedia';
+import { useWikipedia } from '../hooks/useRandomWikipedia';
+import { fetchPageInfo, PageInfo } from '../lib/wikipedia';
 
 type PageProps = { pageInfo?: PageInfo | undefined };
 
-const IndexPage: NextPage = () => {
-  const { drawNext: drawWord, pageInfo, error } = useRandomWikipedia();
+const IndexPage: NextPage<PageProps> = ({ pageInfo: initialPageInfo }) => {
+  const {
+    drawNext: drawWord,
+    pageInfo,
+    error,
+  } = useWikipedia({ initialPageInfo });
   const { draw: drawHappyTalk, happyTalk } = useHappyTalk();
 
   const showResult = useCallback(async () => {
-    await drawWord();
+    await drawWord({ random: true });
     drawHappyTalk();
   }, [drawHappyTalk, drawWord]);
 
@@ -148,23 +153,23 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
   context
 ) => {
   try {
-    const { pageid } = context.query;
+    const { query } = context;
 
-    if (typeof pageid !== 'string') {
+    if (query === undefined) {
       return { props: {} };
     }
 
-    const result = await fetch(
-      `https://ja.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=1&explaintext=1&pageids=${pageid}`
-    );
+    const pageIdNumber =
+      typeof query.pageid === 'string' ? parseInt(query.pageid) : NaN;
 
-    const data = await result.json();
-
-    const pages: undefined | { [K in string]: PageInfo } = data?.query?.pages;
-    const pageInfo = pages && Object.values(pages)[0];
+    const pageInfo = await fetchPageInfo({
+      random: query.random === 'true',
+      pageId: pageIdNumber ? pageIdNumber : undefined,
+      title: typeof query.title === 'string' ? query.title : undefined,
+    });
 
     return { props: { pageInfo } };
-  } catch (e) {
+  } catch (error) {
     return { props: {} };
   }
 };

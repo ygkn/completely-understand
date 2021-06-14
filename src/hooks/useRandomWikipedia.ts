@@ -1,41 +1,25 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
-const randomApiUrl =
-  'https://ja.wikipedia.org/w/api.php?origin=*&action=query&format=json&prop=extracts&generator=random&exintro=1&explaintext=1&grnnamespace=0';
+import { fetchPageInfo, PageInfo, Query } from '../lib/wikipedia';
 
-export type PageInfo = {
-  pageid: number;
-  title: string;
-  extract: string;
-};
-
-export const useRandomWikipedia = (): {
-  drawNext: () => unknown;
+export const useWikipedia = ({
+  initialPageInfo,
+}: {
+  initialPageInfo?: PageInfo;
+} = {}): {
+  drawNext: (query: Query) => Promise<unknown>;
   pageInfo: PageInfo | undefined;
   error: unknown;
 } => {
-  const [pageInfo, setPageInfo] = useState<PageInfo | undefined>();
+  const [pageInfo, setPageInfo] = useState<PageInfo | undefined>(
+    initialPageInfo
+  );
   const [error, setError] = useState<Error | undefined>();
 
-  const drawNext = async () => {
-    try {
-      const result = await fetch(randomApiUrl);
-
-      const data = await result.json();
-
-      const pages: undefined | { [K in string]: PageInfo } = data?.query?.pages;
-      const pageInfo = pages && Object.values(pages)[0];
-
-      if (pageInfo === undefined) {
-        setError(new Error('Invalid return data from Wikipedia'));
-        return;
-      }
-
-      setPageInfo(pageInfo);
-    } catch (e) {
-      setError(e);
-    }
-  };
+  const drawNext = useCallback(
+    (query: Query) => fetchPageInfo(query).then(setPageInfo).catch(setError),
+    []
+  );
 
   return {
     drawNext,
