@@ -38,7 +38,7 @@ class MyDocument extends Document {
           <meta name="apple-mobile-web-app-title" content={manifestJSON.name} />
           <meta name="application-name" content={manifestJSON.short_name} />
         </Head>
-        <body className="font-sans bg-white text-black dark:bg-black dark:text-white">
+        <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
           <NextScript />
