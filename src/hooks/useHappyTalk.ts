@@ -1,24 +1,12 @@
 import { useState, useCallback } from 'react';
 
-const happyTalkList = [
-  'おめでとう！',
-  'さすが！',
-  'すごい！',
-  'やったね！',
-  'Congrats!!',
-  'Awesome!!',
-  'Yay!!',
-] as const;
-
-export type HappyTalk = typeof happyTalkList[number];
+import { HappyTalk, drawHappyTalk } from '../lib/happyTalk';
 
 export const useHappyTalk = (): { happyTalk: HappyTalk; draw: () => void } => {
-  const [happyTalk, setHappyTalk] = useState<HappyTalk>(happyTalkList[0]);
+  const [happyTalk, setHappyTalk] = useState<HappyTalk>(() => drawHappyTalk());
 
   const draw = useCallback(() => {
-    setHappyTalk(
-      happyTalkList[Math.floor(Math.random() * happyTalkList.length)]
-    );
+    setHappyTalk(drawHappyTalk());
   }, []);
 
   return { happyTalk, draw };
