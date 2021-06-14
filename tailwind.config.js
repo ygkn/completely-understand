@@ -1,8 +1,11 @@
 module.exports = {
-  purge: [],
+  purge: ['src/**/*.tsx'],
+  darkMode: 'media',
   theme: {
     extend: {},
   },
-  variants: {},
+  variants: {
+    extend: {},
+  },
   plugins: [],
 };
