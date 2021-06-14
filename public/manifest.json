@@ -30,5 +30,19 @@
       "type": "image/png",
       "purpose": "maskable"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "ランダム",
+      "description": "ランダムに完全理解",
+      "url": "/?random=true",
+      "icons": [
+        {
+          "src": "/icons/rondom.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ]
 }
