@@ -29,18 +29,16 @@ const IndexPage: NextPage = () => {
   return (
     <Container py={5} centerContent>
       <NextSeo title="完全に理解した" titleTemplate="%s" />
-      <Box as="header">
-        <Heading as="h1" py={4}>
-          完全に理解した
-        </Heading>
-      </Box>
-      <Button
-        // className="bg-gray-900 text-white py-3 px-10 rounded-full focus:outline-none focus:shadow-outline shadow-lg hover:shadow-xl transition-shadow duration-100"
-        onClick={showResult}
-        type="button"
-      >
-        完全に理解する
-      </Button>
+      <Stack spacing={4} py={4} textAlign="center">
+        <Box as="header">
+          <Heading as="h1">完全に理解した</Heading>
+        </Box>
+        <Text>
+          <Button onClick={showResult} type="button">
+            完全に理解する
+          </Button>
+        </Text>
+      </Stack>
       {pageInfo !== undefined && (
         <Box as="section" py={5} w="full">
           <Stack spacing={4} textAlign="center">
