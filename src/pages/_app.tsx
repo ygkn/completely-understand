@@ -1,9 +1,6 @@
 import '../styles/index.css';
 import type { AppProps } from 'next/app';
 import { VFC, useEffect } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-
-const queryClient = new QueryClient();
 
 const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
   useEffect(() => {
@@ -19,11 +16,7 @@ const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
     return () => window.removeEventListener('resize', setFillHeight);
   }, []);
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
-    </QueryClientProvider>
-  );
+  return <Component {...pageProps} />;
 };
 
 export default MyApp;
