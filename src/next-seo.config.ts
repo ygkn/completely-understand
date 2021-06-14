@@ -10,7 +10,7 @@ export const seoConfig: DefaultSeoProps = {
     '完全に理解するためのWebアプリです。\n Wikipedia の記事からランダムに選んだ記事を 1 つ表示します。',
   twitter: {
     handle: '@ygkn35034',
-    cardType: 'summary_large_image',
+    cardType: 'summary',
   },
   openGraph: {
     type: 'website',
