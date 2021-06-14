@@ -12,7 +12,7 @@ const happyTalkList = [
 
 export type HappyTalk = typeof happyTalkList[number];
 
-const useHappyTalk = (): { happyTalk: HappyTalk; draw: () => void } => {
+export const useHappyTalk = (): { happyTalk: HappyTalk; draw: () => void } => {
   const [happyTalk, setHappyTalk] = useState<HappyTalk>(happyTalkList[0]);
 
   const draw = useCallback(() => {
@@ -23,5 +23,3 @@ const useHappyTalk = (): { happyTalk: HappyTalk; draw: () => void } => {
 
   return { happyTalk, draw };
 };
-
-export default useHappyTalk;

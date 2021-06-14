@@ -9,7 +9,7 @@ export type PageInfo = {
   extract: string;
 };
 
-const useRandomWikipedia = (): {
+export const useRandomWikipedia = (): {
   drawNext: () => unknown;
   pageInfo: PageInfo | undefined;
   error: unknown;
@@ -43,5 +43,3 @@ const useRandomWikipedia = (): {
     error,
   };
 };
-
-export default useRandomWikipedia;
