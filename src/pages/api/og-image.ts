@@ -26,9 +26,6 @@ const createOGP = async (pageInfo: {
   title: string;
   extact: string;
 }): Promise<Buffer> => {
-  registerFont(path.join('./fonts/NotoColorEmoji.ttf'), {
-    family: 'NotoColorEmoji',
-  });
   registerFont(path.join('./fonts/NotoSansCJKjp-Regular.otf'), {
     family: 'NotoSansJP',
   });
@@ -116,7 +113,7 @@ const createOGP = async (pageInfo: {
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
 
-  ctx.font = `bold ${1.5 * rem}px NotoColorEmoji, NotoSansJP`;
+  ctx.font = `bold ${1.5 * rem}px NotoSansJP`;
   renderText(`${pageInfo.title}完全に理解した`, 2.5 * rem, 3);
 
   ctx.fillStyle = '#444444';
