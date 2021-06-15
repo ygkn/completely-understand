@@ -20,8 +20,8 @@ export const seoConfig: DefaultSeoProps = {
     images: [
       {
         url: 'https://completely-understand.ygkn.dev/icons/512maskable.png',
-        width: 876,
-        height: 440,
+        width: 512,
+        height: 512,
         alt: siteName,
       },
     ],
