@@ -39,7 +39,7 @@ const IndexPage: NextPage<PageProps> = ({ pageInfo: initialPageInfo }) => {
           <Heading as="h1">完全に理解した</Heading>
         </Box>
         <Text>
-          <Button onClick={showResult} type="button">
+          <Button colorScheme="gray" onClick={showResult} type="button">
             完全に理解する
           </Button>
         </Text>
@@ -66,7 +66,7 @@ const IndexPage: NextPage<PageProps> = ({ pageInfo: initialPageInfo }) => {
                 url={`https://completely-understand.ygkn.dev/?pageid=${pageInfo.pageid}`}
                 title={`${pageInfo.title}完全に理解した`}
                 resetButtonStyle={false}
-                colorScheme="blue"
+                colorScheme="twitter"
               >
                 Twitter でシェア
               </Button>
