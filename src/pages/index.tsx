@@ -16,9 +16,12 @@ import { useHappyTalk } from '../hooks/useHappyTalk';
 import { useWikipedia } from '../hooks/useRandomWikipedia';
 import { fetchPageInfo, PageInfo } from '../lib/wikipedia';
 
-type PageProps = { pageInfo?: PageInfo | undefined };
+type PageProps = { pageInfo?: PageInfo | undefined; random: boolean };
 
-const IndexPage: NextPage<PageProps> = ({ pageInfo: initialPageInfo }) => {
+const IndexPage: NextPage<PageProps> = ({
+  pageInfo: initialPageInfo,
+  random: initialRandom,
+}) => {
   const {
     drawNext: drawWord,
     pageInfo,
@@ -37,30 +40,34 @@ const IndexPage: NextPage<PageProps> = ({ pageInfo: initialPageInfo }) => {
         title="完全に理解した"
         titleTemplate="%s"
         twitter={
-          pageInfo && {
-            handle: '@ygkn35034',
-            cardType: 'summary_large_image',
-          }
+          !initialRandom && pageInfo
+            ? {
+                handle: '@ygkn35034',
+                cardType: 'summary_large_image',
+              }
+            : undefined
         }
         openGraph={
-          pageInfo && {
-            type: 'website',
-            url: `https://completely-understand.ygkn.dev/?pageid=${encodeURIComponent(
-              pageInfo.pageid
-            )}`,
-            title: `${pageInfo.title}完全に理解した`,
-            description: 'あなたも完全理解',
-            images: [
-              {
-                url: `https://completely-understand.ygkn.dev/api/og-image?title=${encodeURIComponent(
-                  pageInfo.title
-                )}&extact=${encodeURIComponent(pageInfo.extract)}`,
-                width: 1200,
-                height: 630,
-                alt: '${pageInfo.title}完全に理解した',
-              },
-            ],
-          }
+          !initialRandom && pageInfo
+            ? {
+                type: 'website',
+                url: `https://completely-understand.ygkn.dev/?pageid=${encodeURIComponent(
+                  pageInfo.pageid
+                )}`,
+                title: `${pageInfo.title}完全に理解した`,
+                description: 'あなたも完全理解',
+                images: [
+                  {
+                    url: `https://completely-understand.ygkn.dev/api/og-image?title=${encodeURIComponent(
+                      pageInfo.title
+                    )}&extact=${encodeURIComponent(pageInfo.extract)}`,
+                    width: 1200,
+                    height: 630,
+                    alt: '${pageInfo.title}完全に理解した',
+                  },
+                ],
+              }
+            : undefined
         }
       />
       <Stack spacing={4} py={4} textAlign="center">
@@ -185,7 +192,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
     const { query } = context;
 
     if (query === undefined) {
-      return { props: {} };
+      return { props: { random: false } };
     }
 
     const pageIdNumber =
@@ -197,9 +204,9 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async (
       title: typeof query.title === 'string' ? query.title : undefined,
     });
 
-    return { props: { pageInfo } };
+    return { props: { pageInfo, random: query.random === 'true' } };
   } catch (error) {
-    return { props: {} };
+    return { props: { random: false } };
   }
 };
 
