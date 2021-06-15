@@ -1,30 +1,9 @@
 import { createCanvas, registerFont, Image } from 'canvas';
-import dataUriToBuffer from 'data-uri-to-buffer';
-import { mkdtempSync, writeFileSync } from 'fs';
 import Mikan from 'mikanjs';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { tmpdir } from 'os';
 import path from 'path';
 
-import LogoImage from '../../../public/icons/512.png';
-import NotoColorEmoji from '../../../public/NotoColorEmoji.ttf';
-import NotoSansCjkJpBold from '../../../public/NotoSansCJKjp-Bold.otf';
-import NotoSansCjkJpRegular from '../../../public/NotoSansCJKjp-Regular.otf';
-
-const dir = mkdtempSync(path.join(tmpdir(), 'fonts'));
-
-writeFileSync(
-  path.join(dir, 'NotoColorEmoji.ttf'),
-  dataUriToBuffer(NotoColorEmoji)
-);
-writeFileSync(
-  path.join(dir, 'NotoSansCJKjp-Regular.otf'),
-  dataUriToBuffer(NotoSansCjkJpRegular)
-);
-writeFileSync(
-  path.join(dir, 'NotoSansCJKjp-Bold.otf'),
-  dataUriToBuffer(NotoSansCjkJpBold)
-);
+import LogoImage from '../../../public/icons/192.png';
 
 export default async (
   request: NextApiRequest,
@@ -47,13 +26,13 @@ const createOGP = async (pageInfo: {
   title: string;
   extact: string;
 }): Promise<Buffer> => {
-  registerFont(path.join(dir, 'NotoColorEmoji.ttf'), {
+  registerFont(path.join('./fonts/NotoColorEmoji.ttf'), {
     family: 'NotoColorEmoji',
   });
-  registerFont(path.join(dir, 'NotoSansCJKjp-Regular.otf'), {
+  registerFont(path.join('./fonts/NotoSansCJKjp-Regular.otf'), {
     family: 'NotoSansJP',
   });
-  registerFont(path.join(dir, 'NotoSansCJKjp-Bold.otf'), {
+  registerFont(path.join('./fonts/NotoSansCJKjp-Bold.otf'), {
     family: 'NotoSansJP',
     weight: 'bold',
   });

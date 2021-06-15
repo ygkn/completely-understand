@@ -45,12 +45,16 @@ const IndexPage: NextPage<PageProps> = ({ pageInfo: initialPageInfo }) => {
         openGraph={
           pageInfo && {
             type: 'website',
-            url: `https://completely-understand.ygkn.dev/?pageid=${pageInfo.pageid}`,
+            url: `https://completely-understand.ygkn.dev/?pageid=${encodeURIComponent(
+              pageInfo.pageid
+            )}`,
             title: `${pageInfo.title}完全に理解した`,
             description: 'あなたも完全理解',
             images: [
               {
-                url: `https://completely-understand.ygkn.dev/api/og-image?title=${pageInfo.title}&extact=${pageInfo.extract}`,
+                url: `https://completely-understand.ygkn.dev/api/og-image?title=${encodeURIComponent(
+                  pageInfo.title
+                )}&extact=${encodeURIComponent(pageInfo.extract)}`,
                 width: 1200,
                 height: 630,
                 alt: '${pageInfo.title}完全に理解した',
