@@ -33,7 +33,32 @@ const IndexPage: NextPage<PageProps> = ({ pageInfo: initialPageInfo }) => {
 
   return (
     <Container py={5} centerContent>
-      <NextSeo title="完全に理解した" titleTemplate="%s" />
+      <NextSeo
+        title="完全に理解した"
+        titleTemplate="%s"
+        twitter={
+          pageInfo && {
+            handle: '@ygkn35034',
+            cardType: 'summary_large_image',
+          }
+        }
+        openGraph={
+          pageInfo && {
+            type: 'website',
+            url: `https://completely-understand.ygkn.dev/?pageid=${pageInfo.pageid}`,
+            title: `${pageInfo.title}完全に理解した`,
+            description: 'あなたも完全理解',
+            images: [
+              {
+                url: `https://completely-understand.ygkn.dev/api/og-image?title=${pageInfo.title}&extact=${pageInfo.extract}`,
+                width: 1200,
+                height: 630,
+                alt: '${pageInfo.title}完全に理解した',
+              },
+            ],
+          }
+        }
+      />
       <Stack spacing={4} py={4} textAlign="center">
         <Box as="header">
           <Heading as="h1">完全に理解した</Heading>
