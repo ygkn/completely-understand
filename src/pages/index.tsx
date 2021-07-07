@@ -59,8 +59,8 @@ const IndexPage: NextPage<PageProps> = ({
                 images: [
                   {
                     url: `https://completely-understand.ygkn.dev/api/og-image?text=${encodeURIComponent(
-                      pageInfo.title
-                    )}:${encodeURIComponent(pageInfo.extract)}`,
+                      `${pageInfo.title}:${pageInfo.extract}`
+                    )}`,
                     width: 1200,
                     height: 630,
                     alt: '${pageInfo.title}完全に理解した',
