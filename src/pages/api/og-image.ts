@@ -9,10 +9,16 @@ export default async (
   request: NextApiRequest,
   response: NextApiResponse
 ): Promise<void> => {
+  const text =
+    (Array.isArray(request.query.text)
+      ? request.query.text[0]
+      : request.query.text) ?? '';
+
+  const texts = text.split(':');
+
   const buf = await createOGP({
-    title: typeof request.query.title === 'string' ? request.query.title : '',
-    extact:
-      typeof request.query.extact === 'string' ? request.query.extact : '',
+    title: texts[0] ?? '',
+    extact: texts[1] ?? '',
   });
 
   response.writeHead(200, {
