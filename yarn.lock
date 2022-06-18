@@ -4345,10 +4345,10 @@ micromatch@^4.0.2:
     braces "^3.0.1"
     picomatch "^2.0.5"
 
-mikanjs@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/mikanjs/-/mikanjs-1.0.11.tgz#0c2c23763bf501b0ad9643495981ef97b8cb435d"
-  integrity sha512-ujAW9g/d6cMjyfVXXGGvKAlUt3VhITlWDVDaKNWCMF53LGBmllDzCMOWrKyTvtH5QZiQsTlRApFJxFTqFM9SMg==
+mikanjs@1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/mikanjs/-/mikanjs-1.0.14.tgz#83de5e477edcb652e6d0d00adc089d7b4dc17683"
+  integrity sha512-PdTkPUIPhTfumBRHaXmbU9b7TIjDS/6rAK7yrFjOJnW89SEUpxQv5KRp1iaU39frq8nHBYiu4EympS2X3idIlQ==
 
 miller-rabin@^4.0.0:
   version "4.0.1"
