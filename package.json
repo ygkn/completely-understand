@@ -16,7 +16,7 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "canvas": "2.6.1",
-    "data-uri-to-buffer": "^3.0.1",
+    "data-uri-to-buffer": "^4.0.0",
     "framer-motion": "^4",
     "mikanjs": "^1.0.11",
     "next": "10.2.3",
